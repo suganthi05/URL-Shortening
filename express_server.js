@@ -57,6 +57,15 @@ app.post("/urls", (req, res) => {
   res.redirect("/urls");
 });
 
+//a POST route to add the entered long URL along with the generated short url
+app.post("/urls/:id/update", (req, res) => {
+	console.log(req.params.id);
+  var tinyURL = req.params.id;
+  //var inputURL = req.body.longURL;
+  urlDatabase[tinyURL] = req.body.longURL;
+  res.redirect("/urls");
+});
+
 //a POST route to handle the form submission for Adding the new LongURL
 app.post("/urls/:id/", (req, res) => {
   urlDatabase[req.params.id] = req.body.longURL;
@@ -71,7 +80,8 @@ app.post("/urls/:id/delete", (req, res) => {
 
 //a POST route to edit the selected URL
 app.post("/urls/:id/edit", (req, res) => {
-  res.redirect("/urls");
+	  let templateVars = { shortURL: req.params.id, longURL: urlDatabase[req.params.id] };
+  res.render("urls_show",templateVars);
  });
 
 app.get("/u/:shortURL", (req, res) => {
