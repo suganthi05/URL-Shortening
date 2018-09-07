@@ -9,6 +9,8 @@ var urlDatabase = {
 };
 
 const bodyParser = require("body-parser");
+const cookieParser = require('cookie-parser')
+app.use(cookieParser());
 app.use(bodyParser.urlencoded({extended: true}));
 
 app.get("/", (req, res) => {
@@ -27,7 +29,7 @@ app.get("/hello", (req, res) => {
 
 //Index- Display all the URLs and their shortened forms,
 app.get("/urls", (req, res) => {
-  let templateVars = { urls: urlDatabase };
+  let templateVars = { urls: urlDatabase, username: req.cookies.username };
   res.render("urls_index", templateVars);
 });
 
@@ -89,6 +91,43 @@ app.get("/u/:shortURL", (req, res) => {
   res.redirect(longURL);
 });
 
+app.get("/login", (req, res) => {
+  let templateVars = {
+    username: req.cookies["username"],
+    urls: urlDatabase
+    // ... any other vars
+  };
+  res.render("urls_login", templateVars);
+});
+
+
+app.post("/login", (req, res) => {
+	console.log(req.body.username);
+  res.cookie('username', req.body.username);
+  
+  res.redirect("/urls");
+});
+
+
+app.post("/loginok", (req, res) => {
+   console.log(req.body.username);
+   res.cookie('username', req.body.username);
+  
+  res.redirect("/urls/new");
+});
+
+app.post("/logout", (req, res) => {
+  res.clearCookie("username")
+ // clear.cookie('username', req.body.username);
+ res.redirect("/urls");
+});
+
+
+app.get("/register", (req, res) => {
+  res.render("register");
+});
+
+ 
 //Implement a function that produces a string of 6 random alphanumeric characters
 function generateRandomString() {
   var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";

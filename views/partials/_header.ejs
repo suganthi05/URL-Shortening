@@ -1,1 +1,14 @@
 <head>Tiny App</head>
+<%if(typeof(username) != 'undefined'){ %>
+	<%= username %>
+<%}%>
+
+
+  <form action="/logout" method='POST'>
+	<input value="logout" type="submit" name="Submit">
+</form>
+
+  <form action="/login" method='GET'>
+	<input value="login" type="submit" name="Submit">
+</form>
+
