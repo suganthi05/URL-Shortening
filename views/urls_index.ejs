@@ -1,0 +1,61 @@
+<!--
+A list or table of the URLs and their shortened forms. 
+A link for shortening a new URL. 
+-------------------------------------------------------
+-->
+<!--urls_index.ejs template is receiving the data it needs to display-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>TinyApp</title>
+</head>
+<body>
+	 <!-- Add your EJS code here -->
+	<form style="margin: 10%;">
+   
+    <table style=" border: 1px solid #333;">
+    <thead>
+        <tr>
+            <th colspan="4"></th><h1>Tiny App</h1></th>
+        </tr>
+    </thead>
+    <tbody> 
+		<tr>
+			<td style=" border: 1px solid #333;"><h3><b>Short URL</b></h3></td>
+            <td style=" border: 1px solid #333;"><h3>Long URL</h3></td>
+            <td style=" border: 1px solid #333;"><h3>Edit</h3></td>
+            <td style=" border: 1px solid #333;"><h3>Delete</h3></td>
+        </tr>
+        <% for (var url in urls) { %>
+ 		<tr>
+			<td style=" border: 1px solid #333; width: 200px;"><h3>
+				
+				<a href="/u/<%= url %>">
+                http://localhost:8480/u/<%= url %>
+              </a>
+			</h3></td>
+            <td style=" border: 1px solid #333; width: 300px;"><h3><a href=<%= urls[url] %>><%= urls[url] %></a></h3></td>
+            <td style=" border: 1px solid #333;">
+				<form method ="POST" action ="/urls/<%= url %>/edit">
+            		<input type="submit" value="Edit" id="edit">
+            	</form>
+        	</td>
+            <td style=" border: 1px solid #333;">
+            	<form method ="POST" action ="/urls/<%= url %>/delete">
+            		<input type="submit" value="Delete" id="delete">
+        		</form>
+        	</td>
+    	</tr>
+        <% } %>
+        </tr>
+    </tbody>
+    <tfoot>
+        <tr>
+            <td style=" border: 1px solid #333;" colspan="4"><h2><a href="http://localhost:8480/urls/new">Add new short URL</a></h2></td>
+        </tr>
+    </tfoot>
+</table>
+    		
+    </form>
+</body>
+</html>
