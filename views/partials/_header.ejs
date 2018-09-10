@@ -1,14 +1,14 @@
-<head>Tiny App</head>
-<%if(typeof(username) != 'undefined'){ %>
-	<%= username %>
-<%}%>
-
-
-  <form action="/logout" method='POST'>
-	<input value="logout" type="submit" name="Submit">
-</form>
-
-  <form action="/login" method='GET'>
-	<input value="login" type="submit" name="Submit">
-</form>
-
+<!DOCTYPE html>
+<html lang="en">
+  <header>
+    <h1>Tiny App for Lighthouse Labs</h1>
+	<% if (typeof(users[user]) != "undefined") { %>
+      <h3>Welcome&nbsp; <%= users[user].email %></h3>
+      <form action="/logout" method="POST">
+        <input value="logout" type="submit" name="Submit">
+      </form>
+	<% } else { %>
+	  <a href="/login">Login</a>&nbsp;|&nbsp;<a href="/register">Register</a>
+	<%}%>
+  </header>
+</html>

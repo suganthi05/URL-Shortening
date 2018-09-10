@@ -1,18 +1,17 @@
-
-<!--Basic form page that we will use to submit URLs to be shortened.-->
 <!DOCTYPE html>
 <html lang="en">
-  <head>    <% include partials/_header %>
+  <head>
+    <title>Tiny App - Login</title>
   </head>
   <body style="font-size:20px; padding:50px;">
-    <form action="/login" method="POST" style="margin:150px;">
-      <label for="username">Enter a Username:</label>
-      <input id="username" type="text" name="username" placeholder="Enter username..." style="width: 300px">
-
+    <% include partials/_header %>
+    <form action="/login" method="POST" align="center">
+    <h1>Login Screen</h1><br><br><br><br>
+    <label for="user">Enter email:</label>
+    <input id="user" type="email" name="user" placeholder="Enter email..." style="width: 300px"><br><br>
       <label for="password">Enter the Password:</label>
-      <input id="password" type="text" name="password" placeholder="Enter Password" style="width: 300px">
-      
-      <input type="submit" value="Submit">
+      <input id="password" type="password" name="password" placeholder="Enter password..." style="width: 300px"><br><br>
+      <input type="submit" value="Login">
     </form>
   </body>
 </html>
